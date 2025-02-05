@@ -9,7 +9,7 @@ Contents:
 
     TRkMiner ...................  frequent pattern mining
     RPInteract .................  learn and forecast patterns’ subjective interestingness
-    Datasets/ ..................  Example graphs
+    Datasets.zip ..................  Example graphs
 
 Requirements:
 =====
