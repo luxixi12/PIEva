@@ -6,7 +6,7 @@ np.random.seed(0)
 from sklearn.ensemble import RandomForestRegressor
 
 def train_random_forest(X, y):
-    model = RandomForestRegressor(n_estimators=100, random_state=42)  # 你可以根据需要调整n_estimators的数量
+    model = RandomForestRegressor(n_estimators=100, random_state=42)  
     model.fit(X, y)
     return model
 
@@ -47,32 +47,22 @@ def human_annotation_stim(data, n_clusters):
     return real_labels
 
 def pairwise_interaction_Viol(ids, real_labels):
-    priority_rank = [ids[0]]  # 开始时列表中只有第一个id
-    count = 0  # 追踪比较的次数
-
-    # 从第二个元素开始遍历
+    priority_rank = [ids[0]] 
     for i in range(1, len(ids)):
         current_id = ids[i]
         inserted = False
-
-        # 遍历当前排序列表，找到插入点
         for j in range(len(priority_rank)):
-            # 计数比较次数
             count += 1
-            # 根据标签值进行比较
             if real_labels[current_id] < real_labels[priority_rank[j]]:
-                # 插入到找到的位置
                 priority_rank.insert(j, current_id)
                 inserted = True
                 break
 
-        # 如果没有找到更小的，说明current_id是目前最大的，加在最后
+      
         if not inserted:
             priority_rank.append(current_id)
 
-    # 将列表逆序
     priority_rank.reverse()
-    # 创建一个字典，映射每个id到其排名
     priority_rank = {id: rank + 1 for rank, id in enumerate(priority_rank)}
     priority_rank = dict(sorted(priority_rank.items(), key=lambda item: item[1]))
     return priority_rank, count
@@ -120,7 +110,7 @@ def truth_topk_get(real_labels, top_k):
     return top_k_true
 
 def top_k_keys(dictionary, k):
-    sorted_items = sorted(dictionary.items(), key=lambda item: item[1], reverse=True)
+    sorted_items = sorted(dictionary.items(), key=lambda item: item[1])
     top_k = [item[0] for item in sorted_items[:k]]
     return top_k
 
